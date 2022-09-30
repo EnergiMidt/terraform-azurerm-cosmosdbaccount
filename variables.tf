@@ -40,19 +40,19 @@ variable "resource_group" {
 # }
 
 variable "offer_type" {
-  description = "(Optional) Specifies the Offer Type to use for this CosmosDB Account. Currently, this option can only be set to Standard."
+  description = "(Optional) Specifies the Offer Type to use for this CosmosDB Account. Currently, this option can only be set to `Standard`."
   default     = "Standard"
   type        = string
+  validation {
+    condition     = can(regex("^(Standard)$", var.offer_type))
+    error_message = "Possible values are Standard."
+  }
 }
 
 variable "analytical_storage_schema_type" {
   description = "(Optional) The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`."
   type        = string
   default     = null
-  validation {
-    condition     = contains(["FullFidelity", "WellDefined"], var.analytical_storage_schema_type)
-    error_message = "Possible values are `FullFidelity` and `WellDefined`."
-  }
 }
 
 # variable "capacity" {}               # TODO: Implement this variable block.
