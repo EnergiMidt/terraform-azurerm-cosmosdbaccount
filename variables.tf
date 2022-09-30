@@ -121,8 +121,12 @@ variable "enable_automatic_failover" {
 }
 
 variable "public_network_access_enabled" {
+  # checkov:skip=CKV_AZURE_99: The `public_network_access_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/ensure-cosmos-db-accounts-have-restricted-access
+  # checkov:skip=CKV_AZURE_101: The `public_network_access_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/ensure-that-azure-cosmos-db-disables-public-network-access
   description = "(Optional) Whether or not public network access is allowed for this CosmosDB account."
-  default     = false
+  default     = true
   type        = bool
 }
 

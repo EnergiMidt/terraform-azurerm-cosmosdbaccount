@@ -26,7 +26,12 @@ resource "azurerm_cosmosdb_account" "account" {
 
   kind = var.kind
 
-  enable_automatic_failover     = var.enable_automatic_failover
+  enable_automatic_failover = var.enable_automatic_failover
+
+  # checkov:skip=CKV_AZURE_99: The `public_network_access_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/ensure-cosmos-db-accounts-have-restricted-access
+  # checkov:skip=CKV_AZURE_101: The `public_network_access_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/ensure-that-azure-cosmos-db-disables-public-network-access
   public_network_access_enabled = var.public_network_access_enabled
 
   consistency_policy {
@@ -123,11 +128,4 @@ resource "azurerm_cosmosdb_account" "account" {
   # checkov:skip=CKV_AZURE_140: The `local_authentication_disabled` variable defaults to false.
   # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
   local_authentication_disabled = var.local_authentication_disabled
-
-  timeouts {
-    create = "180m"
-    update = "180m"
-    read   = "5m"
-    delete = "180m"
-  }
 }
