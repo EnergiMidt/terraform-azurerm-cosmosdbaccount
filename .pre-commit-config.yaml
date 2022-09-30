@@ -17,7 +17,7 @@ repos:
     hooks:
       - id: terraform_tfsec
       - id: terraform_docs
-      # - id: terraform_checkov
+      - id: terraform_checkov
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:

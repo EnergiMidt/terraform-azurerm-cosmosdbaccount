@@ -112,6 +112,18 @@ resource "azurerm_cosmosdb_account" "account" {
     }
   }
 
+  # checkov:skip=CKV_AZURE_100: The `key_vault_key_id` variable is optional by default.
+  # https://docs.bridgecrew.io/docs/ensure-that-cosmos-db-accounts-have-customer-managed-keys-to-encrypt-data-at-rest
+  key_vault_key_id = var.key_vault_key_id
+
+  # checkov:skip=CKV_AZURE_132: The `access_key_metadata_writes_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/bc_azr_storage_4
+  access_key_metadata_writes_enabled = var.access_key_metadata_writes_enabled
+
+  # checkov:skip=CKV_AZURE_140: The `local_authentication_disabled` variable defaults to false.
+  # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
+  local_authentication_disabled = var.local_authentication_disabled
+
   timeouts {
     create = "180m"
     update = "180m"

@@ -116,81 +116,80 @@ variable "geo_location_zone_redundant" {
 
 variable "enable_automatic_failover" {
   description = "(Optional) Enable automatic fail over for this Cosmos DB account."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "public_network_access_enabled" {
   description = "(Optional) Whether or not public network access is allowed for this CosmosDB account."
+  default     = false
   type        = bool
-  default     = true
 }
-
 
 variable "enabled" {
   description = "(Optional) Enable the creation of this Cosmos DB account."
-  default     = true
   type        = bool
+  default     = true
 }
 
 variable "capabilities_allow_self_serve_upgrade_to_mongo_36" {
   description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_disable_rate_limiting_responses" {
   description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_aggregation_pipeline" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_cassandra" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_gremlin" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_mongo" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_table" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_enable_serverless" {
   description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_mongo_db_v34" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "capabilities_mongo_enable_doc_level_ttl" {
   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  default     = false
   type        = bool
+  default     = false
 }
 
 # This `capabilities` variable is replaced by the use of above `capabilities_*` variables.
@@ -199,13 +198,36 @@ variable "capabilities_mongo_enable_doc_level_ttl" {
 # }
 
 # variable "is_virtual_network_filter_enabled" {} # TODO: Implement this variable block.
-# variable "key_vault_key_id" {} # TODO: Implement this variable block.
+
+variable "key_vault_key_id" {
+  # checkov:skip=CKV_AZURE_100: The `key_vault_key_id` variable is optional by default.
+  # https://docs.bridgecrew.io/docs/ensure-that-cosmos-db-accounts-have-customer-managed-keys-to-encrypt-data-at-rest
+  description = "(Optional) A versionless Key Vault Key ID for CMK encryption. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
 # variable "virtual_network_rule" {} # TODO: Implement this variable block.
 # variable "enable_multiple_write_locations" {} # TODO: Implement this variable block.
-# variable "access_key_metadata_writes_enabled" {} # TODO: Implement this variable block.
+
+variable "access_key_metadata_writes_enabled" {
+  # checkov:skip=CKV_AZURE_132: The `access_key_metadata_writes_enabled` variable defaults to true.
+  # https://docs.bridgecrew.io/docs/bc_azr_storage_4
+  description = "(Optional) Is write operations on metadata resources (databases, containers, throughput) via account keys enabled? Defaults to `true`."
+  type        = bool
+  default     = true
+}
+
 # variable "mongo_server_version" {} # TODO: Implement this variable block.
 # variable "network_acl_bypass_for_azure_services" {} # TODO: Implement this variable block.
-# variable "local_authentication_disabled" {} # TODO: Implement this variable block.
+
+variable "local_authentication_disabled" {
+  # checkov:skip=CKV_AZURE_140: The `local_authentication_disabled` variable defaults to false.
+  # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
+  description = "(Optional) Disable local authentication and ensure only MSI and AAD can be used exclusively for authentication. Defaults to `false`. Can be set only when using the SQL API."
+  type        = bool
+  default     = false
+}
 
 # variable "backup" {} # TODO: Implement this variable block.
 # variable "cors_rule" {} # TODO: Implement this variable block.
