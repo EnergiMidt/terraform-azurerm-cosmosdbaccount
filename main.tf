@@ -1,6 +1,6 @@
 locals {
-  standard_name = var.name
-  # standard_name = "${var.name}${var.environment}"
+  name = var.name
+  # name = "${var.name}${var.environment}"
 
   cosmosdb_account = concat(azurerm_cosmosdb_account.account.*, [null])[0]
 
@@ -11,7 +11,7 @@ locals {
 resource "azurerm_cosmosdb_account" "account" {
   count = var.enabled ? 1 : 0
 
-  name                = var.override_name != "" ? var.override_name : local.standard_name
+  name                = var.override_name != "" ? var.override_name : local.name
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
 
