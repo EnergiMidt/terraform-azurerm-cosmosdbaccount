@@ -237,3 +237,9 @@ variable "local_authentication_disabled" {
 # variable "cors_rule" {} # TODO: Implement this variable block.
 # variable "identity" {} # TODO: Implement this variable block.
 # variable "restore" {} # TODO: Implement this variable block.
+
+variable "tags" {
+  description = "(Optional) A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = null # {}
+}

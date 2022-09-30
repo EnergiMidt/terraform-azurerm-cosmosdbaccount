@@ -128,4 +128,6 @@ resource "azurerm_cosmosdb_account" "account" {
   # checkov:skip=CKV_AZURE_140: The `local_authentication_disabled` variable defaults to false.
   # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
   local_authentication_disabled = var.local_authentication_disabled
+
+  tags = var.tags
 }
