@@ -84,8 +84,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_azurerm_cosmosdb_account"></a> [azurerm\_cosmosdb\_account](#output\_azurerm\_cosmosdb\_account) | n/a |
-| <a name="output_azurerm_cosmosdb_account_id"></a> [azurerm\_cosmosdb\_account\_id](#output\_azurerm\_cosmosdb\_account\_id) | n/a |
+| <a name="output_azurerm_cosmosdb_account"></a> [azurerm\_cosmosdb\_account](#output\_azurerm\_cosmosdb\_account) | The Azure CosmosDB Account resource. |
+| <a name="output_azurerm_cosmosdb_account_id"></a> [azurerm\_cosmosdb\_account\_id](#output\_azurerm\_cosmosdb\_account\_id) | The ID of Azure CosmosDB Account resource. |
 <!-- END_TF_DOCS -->
 
 [1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account
