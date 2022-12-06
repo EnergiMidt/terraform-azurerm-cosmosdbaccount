@@ -2,7 +2,7 @@ locals {
   name     = var.override_name == null ? "${var.system_name}-${lower(var.environment)}-cosmos" : var.override_name
   location = var.override_location == null ? var.resource_group.location : var.override_location
 
-  cosmosdb_account = concat(azurerm_cosmosdb_account.cosmosdb_account, [null])[0]
+  cosmosdb_account = concat(azurerm_cosmosdb_account.cosmosdb_account[*], [null])[0]
 
   # tflint-ignore: terraform_unused_declarations
   validate_capabilities_mongo_db_v34 = (var.capabilities_mongo_db_v34 == true && var.capabilities_enable_mongo == false) ? tobool("Setting `MongoDBv3.4` also requires setting `EnableMongo`.") : true
