@@ -117,6 +117,34 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
 
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_mongo_16mb_document_support == false ? [] : [1]
+    content {
+      name = "EnableMongo16MBDocumentSupport"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_mongo_retryable_writes == false ? [] : [1]
+    content {
+      name = "EnableMongoRetryableWrites"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_mongo_role_based_access_control == false ? [] : [1]
+    content {
+      name = "EnableMongoRoleBasedAccessControl"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_unique_compound_nested_docs == false ? [] : [1]
+    content {
+      name = "EnableUniqueCompoundNestedDocs"
+    }
+  }
+
   # checkov:skip=CKV_AZURE_100: The `key_vault_key_id` variable is optional by default.
   # https://docs.bridgecrew.io/docs/ensure-that-cosmos-db-accounts-have-customer-managed-keys-to-encrypt-data-at-rest
   key_vault_key_id = var.key_vault_key_id

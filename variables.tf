@@ -149,61 +149,85 @@ variable "enabled" {
 }
 
 variable "capabilities_allow_self_serve_upgrade_to_mongo_36" {
-  description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+  description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_disable_rate_limiting_responses" {
-  description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+  description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_aggregation_pipeline" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+  description = "(Optional) Configures the EnableAggregationPipeline capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_cassandra" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the EnableCassandra capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_gremlin" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the EnableGremlin capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_mongo" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the EnableMongo capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_table" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_enable_serverless" {
-  description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_mongo_db_v34" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the MongoDBv3.4 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
 
 variable "capabilities_mongo_enable_doc_level_ttl" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  description = "(Optional) Configures the mongoEnableDocLevelTTL capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_mongo_16mb_document_support" {
+  description = "(Optional) Configures the EnableMongo16MBDocumentSupport capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_mongo_retryable_writes" {
+  description = "(Optional) Configures the EnableMongoRetryableWrites capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_mongo_role_based_access_control" {
+  description = "(Optional) Configures the EnableMongoRoleBasedAccessControl capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_unique_compound_nested_docs" {
+  description = "(Optional) Configures the EnableUniqueCompoundNestedDocs capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
   type        = bool
   default     = false
 }
