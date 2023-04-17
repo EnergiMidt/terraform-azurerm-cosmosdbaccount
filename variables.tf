@@ -157,7 +157,7 @@ variable "configuration" {
       max_interval_in_seconds = 5,
       max_staleness_prefix    = 100
     },
-    geo_location = {
+    geo_locations = {
       primary_geo_location = {
         location          = "AzureLocation"
         failover_priority = 0,
