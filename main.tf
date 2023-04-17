@@ -3,9 +3,6 @@ locals {
   location = var.override_location == null ? var.resource_group.location : var.override_location
 
   cosmosdb_account = concat(azurerm_cosmosdb_account.cosmosdb_account[*], [null])[0]
-
-  # tflint-ignore: terraform_unused_declarations
-  # validate_capabilities_mongo_db_v34 = (var.capabilities_mongo_db_v34 == true && var.capabilities_enable_mongo == false) ? tobool("Setting `MongoDBv3.4` also requires setting `EnableMongo`.") : true
 }
 
 resource "azurerm_cosmosdb_account" "cosmosdb_account" {
@@ -34,17 +31,37 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   # https://docs.bridgecrew.io/docs/ensure-that-azure-cosmos-db-disables-public-network-access
   public_network_access_enabled = var.public_network_access_enabled
 
-  consistency_policy {
-    consistency_level       = var.consistency_policy_consistency_level
-    max_interval_in_seconds = var.consistency_policy_max_interval_in_seconds
-    max_staleness_prefix    = var.consistency_policy_max_staleness_prefix
+  dynamic "consistency_policy" {
+    for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? [] : [1]
+
+    content {
+      consistency_level       = consistency_policy.consistency_level
+      max_interval_in_seconds = try(consistency_policy.value.max_interval_in_seconds, null)
+      max_staleness_prefix    = try(consistency_policy.value.max_staleness_prefix, null)
+    }
   }
 
-  geo_location {
-    location          = var.geo_location_location
-    failover_priority = var.geo_location_failover_priority
-    zone_redundant    = var.geo_location_zone_redundant
+  dynamic "geo_location" {
+    for_each = var.configuration.geo_location
+
+    content {
+      location          = geo_location.value.location
+      failover_priority = geo_location.value.failover_priority
+      zone_redundant    = try(geo_location.value.zone_redundant, null)
+    }
   }
+
+  # consistency_policy {
+  #   consistency_level       = var.consistency_policy_consistency_level
+  #   max_interval_in_seconds = var.consistency_policy_max_interval_in_seconds
+  #   max_staleness_prefix    = var.consistency_policy_max_staleness_prefix
+  # }
+
+  # geo_location {
+  #   location          = var.geo_location_location
+  #   failover_priority = var.geo_location_failover_priority
+  #   zone_redundant    = var.geo_location_zone_redundant
+  # }
 
   dynamic "capabilities" {
     for_each = try(toset(var.configuration.capabilities), [])
@@ -53,77 +70,6 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
       name = capabilities.value
     }
   }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_allow_self_serve_upgrade_to_mongo_36 == false ? [] : [1]
-  #   content {
-  #     name = "AllowSelfServeUpgradeToMongo36"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_disable_rate_limiting_responses == false ? [] : [1]
-  #   content {
-  #     name = "DisableRateLimitingResponses"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_aggregation_pipeline == false ? [] : [1]
-  #   content {
-  #     name = "EnableAggregationPipeline"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_cassandra == false ? [] : [1]
-  #   content {
-  #     name = "EnableCassandra"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_gremlin == false ? [] : [1]
-  #   content {
-  #     name = "EnableGremlin"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_mongo == false ? [] : [1]
-  #   content {
-  #     name = "EnableMongo"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_table == false ? [] : [1]
-  #   content {
-  #     name = "EnableTable"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_enable_serverless == false ? [] : [1]
-  #   content {
-  #     name = "EnableServerless"
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_mongo_db_v34 == false ? [] : [1]
-  #   content {
-  #     # name = ["EnableMongo", "MongoDBv3.4"] # Setting `MongoDBv3.4` also requires setting `EnableMongo`.
-  #     name = "MongoDBv3.4" # Setting `MongoDBv3.4` also requires setting `EnableMongo`.
-  #   }
-  # }
-
-  # dynamic "capabilities" {
-  #   for_each = var.capabilities_mongo_enable_doc_level_ttl == false ? [] : [1]
-  #   content {
-  #     name = "mongoEnableDocLevelTTL"
-  #   }
-  # }
 
   # checkov:skip=CKV_AZURE_100: The `key_vault_key_id` variable is optional by default.
   # https://docs.bridgecrew.io/docs/ensure-that-cosmos-db-accounts-have-customer-managed-keys-to-encrypt-data-at-rest

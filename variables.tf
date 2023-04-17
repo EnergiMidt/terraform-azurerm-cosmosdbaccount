@@ -77,45 +77,45 @@ variable "kind" {
   type        = string
 }
 
-variable "consistency_policy_consistency_level" {
-  description = "(Required) The Consistency Level to use for this CosmosDB Account. It can be either BoundedStaleness, Eventual, Session, Strong or ConsistentPrefix."
-  type        = string
-}
+# variable "consistency_policy_consistency_level" {
+#   description = "(Required) The Consistency Level to use for this CosmosDB Account. It can be either BoundedStaleness, Eventual, Session, Strong or ConsistentPrefix."
+#   type        = string
+# }
 
-variable "consistency_policy_max_interval_in_seconds" {
-  description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is `5` - `86400` (1 day). Defaults to `5`. Required when `consistency_level` is set to `BoundedStaleness`."
-  type        = number
-  default     = 5
-}
+# variable "consistency_policy_max_interval_in_seconds" {
+#   description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is `5` - `86400` (1 day). Defaults to `5`. Required when `consistency_level` is set to `BoundedStaleness`."
+#   type        = number
+#   default     = 5
+# }
 
-variable "consistency_policy_max_staleness_prefix" {
-  description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is `10` – `2147483647`. Defaults to `100`. Required when `consistency_level` is set to `BoundedStaleness`."
-  type        = number
-  default     = 100
-}
+# variable "consistency_policy_max_staleness_prefix" {
+#   description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is `10` – `2147483647`. Defaults to `100`. Required when `consistency_level` is set to `BoundedStaleness`."
+#   type        = number
+#   default     = 100
+# }
 
 # This `consistency_policy` variable is replaced by the use of above `consistency_policy_*` variables.
 # variable "consistency_policy" {
 #   description = "(Required) Specifies a consistency_policy resource, used to define the consistency policy for this CosmosDB account."
 # }
 
-variable "geo_location_location" {
-  description = "(Optional) The name of the Azure region to host replicated data."
-  default     = ""
-  type        = string
-}
+# variable "geo_location_location" {
+#   description = "(Optional) The name of the Azure region to host replicated data."
+#   default     = ""
+#   type        = string
+# }
 
-variable "geo_location_failover_priority" {
-  description = "(Optional) The failover priority of the region. A failover priority of `0` indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority `0`."
-  default     = 0
-  type        = number
-}
+# variable "geo_location_failover_priority" {
+#   description = "(Optional) The failover priority of the region. A failover priority of `0` indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority `0`."
+#   default     = 0
+#   type        = number
+# }
 
-variable "geo_location_zone_redundant" {
-  description = "(Optional) Should zone redundancy be enabled for this region? Defaults to `false`."
-  type        = bool
-  default     = false
-}
+# variable "geo_location_zone_redundant" {
+#   description = "(Optional) Should zone redundancy be enabled for this region? Defaults to `false`."
+#   type        = bool
+#   default     = false
+# }
 
 # This `geo_location` variable is replaced by the use of above `geo_location_*` variables.
 # variable "geo_location" {
@@ -151,73 +151,19 @@ variable "enabled" {
 variable "configuration" {
   description = "(Optional) The configuration for block type arguments."
   type        = any
-  default     = null
+  default = {
+    consistency_policy = {
+      consistency_level       = "Session"
+      max_interval_in_seconds = 5,
+      max_staleness_prefix    = 100
+    },
+    geo_location = {
+      location          = "AzureLocation"
+      failover_priority = 0,
+      zone_redundant    = false
+    }
+  }
 }
-
-# variable "capabilities_allow_self_serve_upgrade_to_mongo_36" {
-#   description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_disable_rate_limiting_responses" {
-#   description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_aggregation_pipeline" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_cassandra" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_gremlin" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_mongo" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_table" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_enable_serverless" {
-#   description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_mongo_db_v34" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "capabilities_mongo_enable_doc_level_ttl" {
-#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-#   type        = bool
-#   default     = false
-# }
-
-# This `capabilities` variable is replaced by the use of above `capabilities_*` variables.
-# variable "capabilities" {
-#   description = "(Optional) The capabilities which should be enabled for this Cosmos DB account. Value is a `capabilities` block as defined below. Changing this forces a new resource to be created."
-# }
 
 # variable "is_virtual_network_filter_enabled" {} # TODO: Implement this variable block.
 
