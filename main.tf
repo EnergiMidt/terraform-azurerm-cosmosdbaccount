@@ -32,7 +32,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   public_network_access_enabled = var.public_network_access_enabled
 
   dynamic "consistency_policy" {
-    for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? [] : var.configuration.consistency_policy
+    for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? {} : var.configuration.consistency_policy
 
     content {
       consistency_level       = consistency_policy.value.consistency_level
