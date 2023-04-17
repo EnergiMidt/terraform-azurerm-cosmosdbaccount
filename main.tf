@@ -32,7 +32,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   public_network_access_enabled = var.public_network_access_enabled
 
   dynamic "consistency_policy" {
-    for_each = var.configuration.consistency_policy
+    for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? [] : [1]
 
     content {
       consistency_level       = consistency_policy.value.consistency_level
@@ -42,7 +42,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   }
 
   dynamic "geo_location" {
-    for_each = var.configuration.geo_location
+    for_each = var.configuration.geo_locations
 
     content {
       location          = geo_location.value.location
