@@ -51,18 +51,6 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
 
-  # consistency_policy {
-  #   consistency_level       = var.consistency_policy_consistency_level
-  #   max_interval_in_seconds = var.consistency_policy_max_interval_in_seconds
-  #   max_staleness_prefix    = var.consistency_policy_max_staleness_prefix
-  # }
-
-  # geo_location {
-  #   location          = var.geo_location_location
-  #   failover_priority = var.geo_location_failover_priority
-  #   zone_redundant    = var.geo_location_zone_redundant
-  # }
-
   dynamic "capabilities" {
     for_each = try(toset(var.configuration.capabilities), [])
 
