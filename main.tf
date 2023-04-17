@@ -35,7 +35,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? [] : [1]
 
     content {
-      consistency_level       = consistency_policy.consistency_level
+      consistency_level       = consistency_policy.value.consistency_level
       max_interval_in_seconds = try(consistency_policy.value.max_interval_in_seconds, null)
       max_staleness_prefix    = try(consistency_policy.value.max_staleness_prefix, null)
     }
