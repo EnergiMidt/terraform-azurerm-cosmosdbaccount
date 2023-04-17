@@ -158,9 +158,11 @@ variable "configuration" {
       max_staleness_prefix    = 100
     },
     geo_location = {
-      location          = "AzureLocation"
-      failover_priority = 0,
-      zone_redundant    = false
+      primary_geo_location = {
+        location          = "AzureLocation"
+        failover_priority = 0,
+        zone_redundant    = false
+      }
     }
   }
 }
