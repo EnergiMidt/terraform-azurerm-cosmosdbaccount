@@ -148,65 +148,71 @@ variable "enabled" {
   default     = true
 }
 
-variable "capabilities_allow_self_serve_upgrade_to_mongo_36" {
-  description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  type        = bool
-  default     = false
+variable "configuration" {
+  description = "(Optional) The configuration for block type arguments."
+  type        = any
+  default     = null
 }
 
-variable "capabilities_disable_rate_limiting_responses" {
-  description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_allow_self_serve_upgrade_to_mongo_36" {
+#   description = "(Optional) Configures the AllowSelfServeUpgradeToMongo36 capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_aggregation_pipeline" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_disable_rate_limiting_responses" {
+#   description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_cassandra" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_aggregation_pipeline" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_gremlin" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_cassandra" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_mongo" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_gremlin" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_table" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_mongo" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_enable_serverless" {
-  description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_table" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_mongo_db_v34" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_enable_serverless" {
+#   description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
-variable "capabilities_mongo_enable_doc_level_ttl" {
-  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
-  type        = bool
-  default     = false
-}
+# variable "capabilities_mongo_db_v34" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
+
+# variable "capabilities_mongo_enable_doc_level_ttl" {
+#   description = "(Optional) Configures the EnableTable capability for this Cosmos DB account. Other capabilities are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableTable, EnableServerless, MongoDBv3.4 and mongoEnableDocLevelTTL. Note: Setting MongoDBv3.4 also requires setting EnableMongo."
+#   type        = bool
+#   default     = false
+# }
 
 # This `capabilities` variable is replaced by the use of above `capabilities_*` variables.
 # variable "capabilities" {
