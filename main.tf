@@ -67,6 +67,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   # https://docs.bridgecrew.io/docs/bc_azr_storage_4
   access_key_metadata_writes_enabled = var.access_key_metadata_writes_enabled
 
+  mongo_server_version = var.mongo_server_version
+
   # checkov:skip=CKV_AZURE_140: The `local_authentication_disabled` variable defaults to false.
   # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
   local_authentication_disabled = var.local_authentication_disabled

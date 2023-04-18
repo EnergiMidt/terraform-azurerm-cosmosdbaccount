@@ -71,6 +71,12 @@ variable "analytical_storage_schema_type" {
 # variable "create_mode" {}            # TODO: Implement this variable block.
 # variable "default_identity_type" {} # TODO: Implement this variable block.
 
+variable "mongo_server_version" {
+  description = "(Optional) The Server Version of a MongoDB account. Possible values are `4.2`, `4.0`, `3.6`, and `3.2`."
+  type        = string
+  default     = null
+}
+
 variable "kind" {
   description = "(Optional) Specifies the Kind of CosmosDB to create. Possible values are GlobalDocumentDB and MongoDB. Defaults to GlobalDocumentDB. Changing this forces a new resource to be created."
   default     = "GlobalDocumentDB"
