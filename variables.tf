@@ -83,6 +83,51 @@ variable "kind" {
   type        = string
 }
 
+variable "consistency_policy_consistency_level" {
+  description = "(Required) The Consistency Level to use for this CosmosDB Account. It can be either BoundedStaleness, Eventual, Session, Strong or ConsistentPrefix."
+  type        = string
+}
+
+variable "consistency_policy_max_interval_in_seconds" {
+  description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is `5` - `86400` (1 day). Defaults to `5`. Required when `consistency_level` is set to `BoundedStaleness`."
+  type        = number
+  default     = 5
+}
+
+variable "consistency_policy_max_staleness_prefix" {
+  description = "(Optional) When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is `10` – `2147483647`. Defaults to `100`. Required when `consistency_level` is set to `BoundedStaleness`."
+  type        = number
+  default     = 100
+}
+
+# This `consistency_policy` variable is replaced by the use of above `consistency_policy_*` variables.
+# variable "consistency_policy" {
+#   description = "(Required) Specifies a consistency_policy resource, used to define the consistency policy for this CosmosDB account."
+# }
+
+variable "geo_location_location" {
+  description = "(Optional) The name of the Azure region to host replicated data."
+  default     = ""
+  type        = string
+}
+
+variable "geo_location_failover_priority" {
+  description = "(Optional) The failover priority of the region. A failover priority of `0` indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority `0`."
+  default     = 0
+  type        = number
+}
+
+variable "geo_location_zone_redundant" {
+  description = "(Optional) Should zone redundancy be enabled for this region? Defaults to `false`."
+  type        = bool
+  default     = false
+}
+
+# This `geo_location` variable is replaced by the use of above `geo_location_*` variables.
+# variable "geo_location" {
+#   description = " Configures the geographic locations the data is replicated to and supports the following: location, failover_priority, and zone_redundant."
+# }
+
 # variable "ip_range_filter" {} # TODO: Implement this variable block.
 # variable "enable_free_tier" {} # TODO: Implement this variable block.
 # variable "analytical_storage_enabled" {} # TODO: Implement this variable block.
@@ -107,25 +152,6 @@ variable "enabled" {
   description = "(Optional) Enable the creation of this Cosmos DB account."
   type        = bool
   default     = true
-}
-
-variable "configuration" {
-  description = "(Optional) The configuration for block type arguments."
-  type        = any
-  default = {
-    consistency_policy = {
-      consistency_level       = "Session"
-      max_interval_in_seconds = 5,
-      max_staleness_prefix    = 100
-    },
-    geo_locations = {
-      primary_geo_location = {
-        location          = "AzureLocation"
-        failover_priority = 0,
-        zone_redundant    = false
-      }
-    }
-  }
 }
 
 # variable "is_virtual_network_filter_enabled" {} # TODO: Implement this variable block.
@@ -164,6 +190,41 @@ variable "local_authentication_disabled" {
 # variable "cors_rule" {} # TODO: Implement this variable block.
 # variable "identity" {} # TODO: Implement this variable block.
 # variable "restore" {} # TODO: Implement this variable block.
+
+variable "capabilities_disable_rate_limiting_responses" {
+  description = "(Optional) Configures the DisableRateLimitingResponses capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_mongo" {
+  description = "(Optional) Configures the EnableMongo capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_mongo_retryable_writes" {
+  description = "(Optional) Configures the EnableMongoRetryableWrites capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_table" {
+  description = "(Optional) Configures the EnableTable capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
+variable "capabilities_enable_serverless" {
+  description = "(Optional) Configures the EnableServerless capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
+# This `capabilities` variable is replaced by the use of above `capabilities_*` variables.
+# variable "capabilities" {
+#   description = "(Optional) The capabilities which should be enabled for this Cosmos DB account. Value is a `capabilities` block as defined below. Changing this forces a new resource to be created."
+# }
 
 variable "tags" {
   description = "(Optional) A mapping of tags to assign to the resource."

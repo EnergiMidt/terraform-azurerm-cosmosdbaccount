@@ -31,31 +31,50 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   # https://docs.bridgecrew.io/docs/ensure-that-azure-cosmos-db-disables-public-network-access
   public_network_access_enabled = var.public_network_access_enabled
 
-  dynamic "consistency_policy" {
-    for_each = lookup(var.configuration, "consistency_policy", {}) == {} ? [] : [1]
-
-    content {
-      consistency_level       = var.configuration.consistency_policy.consistency_level
-      max_interval_in_seconds = try(var.configuration.consistency_policy.max_interval_in_seconds, null)
-      max_staleness_prefix    = try(var.configuration.consistency_policy.max_staleness_prefix, null)
-    }
+  consistency_policy {
+    consistency_level       = var.consistency_policy_consistency_level
+    max_interval_in_seconds = var.consistency_policy_max_interval_in_seconds
+    max_staleness_prefix    = var.consistency_policy_max_staleness_prefix
   }
 
-  dynamic "geo_location" {
-    for_each = var.configuration.geo_locations
+  geo_location {
+    location          = var.geo_location_location
+    failover_priority = var.geo_location_failover_priority
+    zone_redundant    = var.geo_location_zone_redundant
+  }
 
+  dynamic "capabilities" {
+    for_each = var.capabilities_disable_rate_limiting_responses == false ? [] : [1]
     content {
-      location          = geo_location.value.location
-      failover_priority = geo_location.value.failover_priority
-      zone_redundant    = try(geo_location.value.zone_redundant, null)
+      name = "DisableRateLimitingResponses"
     }
   }
 
   dynamic "capabilities" {
-    for_each = try(toset(var.configuration.capabilities), [])
-
+    for_each = var.capabilities_enable_mongo == false ? [] : [1]
     content {
-      name = capabilities.value
+      name = "EnableMongo"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_mongo_retryable_writes == false ? [] : [1]
+    content {
+      name = "EnableMongoRetryableWrites"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_table == false ? [] : [1]
+    content {
+      name = "EnableTable"
+    }
+  }
+
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_serverless == false ? [] : [1]
+    content {
+      name = "EnableServerless"
     }
   }
 
