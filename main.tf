@@ -78,6 +78,13 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
 
+  dynamic "capabilities" {
+    for_each = var.capabilities_enable_mongo_16mb_document_support == false ? [] : [1]
+    content {
+      name = "EnableMongo16MBDocumentSupport"
+    }
+  }
+
   # checkov:skip=CKV_AZURE_100: The `key_vault_key_id` variable is optional by default.
   # https://docs.bridgecrew.io/docs/ensure-that-cosmos-db-accounts-have-customer-managed-keys-to-encrypt-data-at-rest
   key_vault_key_id = var.key_vault_key_id

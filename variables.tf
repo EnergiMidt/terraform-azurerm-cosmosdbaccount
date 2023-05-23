@@ -221,6 +221,12 @@ variable "capabilities_enable_serverless" {
   default     = false
 }
 
+variable "capabilities_enable_mongo_16mb_document_support" {
+  description = "(Optional) Configures the EnableMongo16MBDocumentSupport capability for this Cosmos DB account."
+  type        = bool
+  default     = false
+}
+
 # This `capabilities` variable is replaced by the use of above `capabilities_*` variables.
 # variable "capabilities" {
 #   description = "(Optional) The capabilities which should be enabled for this Cosmos DB account. Value is a `capabilities` block as defined below. Changing this forces a new resource to be created."
