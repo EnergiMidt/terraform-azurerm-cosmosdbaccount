@@ -21,9 +21,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
 
-  kind = var.kind
-
-  enable_automatic_failover = var.enable_automatic_failover
+  kind                       = var.kind
+  automatic_failover_enabled = var.enable_automatic_failover
 
   # checkov:skip=CKV_AZURE_99: The `public_network_access_enabled` variable defaults to true.
   # https://docs.bridgecrew.io/docs/ensure-cosmos-db-accounts-have-restricted-access
